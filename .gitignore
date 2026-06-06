@@ -1,0 +1,8 @@
+# Entorno virtual y cachés de Python
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Notas personales (solo para mí)
+learning-notes.md
