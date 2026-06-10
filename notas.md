@@ -36,3 +36,14 @@ También, cuando trabajo con notebook y necesito seleccionar el kernel del venv 
 
 3. ### Definir el objetivo del proyecto
 Lo primero es que quise hacer este proyecto porque con el dinero que gano quiero ver en que mercados globales y nacionales es mejor invertir mi dinero, por ello haré un dashboard y análisis de ciertos datos que me ayudarán a darme cuenta día con día como es que va cambiando el mercado y de que manera puedo decidir en qué meter mi dinero real.
+
+4. ### Dudas y aprendizajes
+Ejemplo para entender la diferencia entre VaR histórico y VaR paramétrico
+Imagina que tienes los retornos diarios de 20 días (uso 20 para que el "peor 5%" sea exactamente el peor 1 día, fácil de ver). Ordenados de peor a mejor:
+-3.0%, -1.5%, -1.0%, -0.8%, -0.5%, -0.2%, 0.1%, 0.3%, 0.5%, 0.7%, 0.9%, 1.1%, 1.3%, 1.5%, 1.8%, 2.0%, 2.5%, 3.5%, 5.0%, 8.0%
+Fíjate en algo de esta acción imaginaria: las caídas son moderadas (la peor es -3%), pero las subidas son enormes (hay días de +5% y +8%). O sea, sube como cohete pero baja suavecito. (Esto se parece a GOOG en un buen periodo.)
+VaR histórico 95% → el peor 5% de 20 días = el peor 1 día. Miro mis datos reales y el peor día fue -3.0%. Punto. El histórico solo mira las caídas que de verdad pasaron, y la peor fue -3%.
+VaR histórico = -3.0%
+VaR paramétrico 95% → aquí NO miro los datos ordenados. Calculo la media y la desviación estándar de los 20 días, y aplico la fórmula normal. El problema: esos días de +5% y +8% inflan la desviación estándar muchísimo (son valores muy lejos del centro). La desviación estándar no distingue "lejos hacia arriba" de "lejos hacia abajo" — solo ve dispersión. Entonces la sigma sale grande por culpa de las subidas.
+Y como la fórmula normal es simétrica, asume que "si sube tanto, también puede bajar tanto". Toma esa sigma inflada y la proyecta hacia abajo: mu + (-1.645)·sigma. Con una sigma grande, eso da una pérdida teórica más grande que la real, digamos:
+VaR paramétrico = -4.2%   (más pesimista que el histórico real de -3%)
